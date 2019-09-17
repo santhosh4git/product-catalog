@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                     docker build --no-cache -t product-catalog-image:latest .
-                    docker tag product-catalog-image:latest mysanreg/product-catalog-image:v${BUILD_NUMBER}
+                    docker tag product-catalog-image:latest mysanreg.azurecr.io/mysanrepo/product-catalog-image:v${BUILD_NUMBER}
                 '''
             }
         }
@@ -32,8 +32,8 @@ pipeline {
         stage('Push Image') {
             steps {
                 sh '''
-                    docker login --username MySanReg --password PvCTXlR0G=knfVVldM26S2VuirKIU+00
-                    docker push mysanreg/product-catalog-image:v${BUILD_NUMBER}
+                    docker login --username MySanReg --password PvCTXlR0G=knfVVldM26S2VuirKIU+00 mysanreg.azurecr.io
+                    docker push mysanreg.azurecr.io/mysanrepo/product-catalog-image:v${BUILD_NUMBER}
                 '''
             }
         }
