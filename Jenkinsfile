@@ -24,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                     docker build --no-cache -t product-catalog-image:latest .
-                    docker tag product-catalog-image:latest akmaharshi/product-catalog-image:v${BUILD_NUMBER}
+                    docker tag product-catalog-image:latest mysanreg/product-catalog-image:v${BUILD_NUMBER}
                 '''
             }
         }
@@ -32,8 +32,8 @@ pipeline {
         stage('Push Image') {
             steps {
                 sh '''
-                    docker login --username akmaharshi --password sairam123
-                    docker push akmaharshi/product-catalog-image:v${BUILD_NUMBER}
+                    docker login --username MySanReg --password PvCTXlR0G=knfVVldM26S2VuirKIU+00
+                    docker push mysanreg/product-catalog-image:v${BUILD_NUMBER}
                 '''
             }
         }
@@ -54,7 +54,7 @@ pipeline {
 
 def notify(status){
     emailext (
-    to: "apemmaraju@nisum.com",
+    to: "s.surya@ucas.ac.uk",
     subject: "${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
     body: """<p>${status}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
         <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME}  [${env.BUILD_NUMBER}]</a></p>""",
